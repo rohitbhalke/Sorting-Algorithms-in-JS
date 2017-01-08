@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+	/* find kth element from given array
+	like [5 1 4 3 2]
+	find 3rd  3
+	find 4th  4
+	*/
+
+function quickSelect(arr, k){
+	if(k>arr.length)
+		return "Array length is smaller than " + k;
+	
+	var place = partition(arr, 0, arr.length-1);
+	while(place!==k-1){
+		if((k-1)>place)
+			place = partition(arr, place+1,arr.length-1)	
+		else
+			place = partition(arr, 0, place-1);
+	}
+
+	return arr[place];
+}
+
+function partition(arr, low, high){
+	var left = low, right=high-1, pivot=arr[high];
+	while(left<=right){
+		while(arr[left]<pivot)
+			left++;
+		while(arr[right]>=pivot)
+			right--;
+		if(left>right)
+			break;
+		swap(arr, left, right);
+	}
+	swap(arr, left, high);
+	return left;
+}
+
+function swap(arr, i, j){
+	var temp = arr[i];
+	arr[i] = arr[j];
+	arr[j] = temp;
+}
+
+var arr = [10, 80, 30, 90, 40, 50, 70];
+console.log(quickSelect(arr,5));
+
+
+</script>
+
+</body>
+</html>

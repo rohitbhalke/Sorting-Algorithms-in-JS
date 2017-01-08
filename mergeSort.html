@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<script type="text/javascript">
+  //http://quiz.geeksforgeeks.org/merge-sort/
+
+
+function merge(arr, l,m,r){
+
+var aux1=[], aux2=[];
+var i=0,j=0,k=0;
+for(i=l;i<=m;i++){
+aux1.push(arr[i]);
+}
+
+i=0;
+j=0;
+
+for(i=m+1;i<=r;i++){
+aux2.push(arr[i]);
+}
+
+
+i=0;
+j=0;
+ k=l;
+while(i<aux1.length && j<aux2.length){
+  if(aux1[i]<aux2[j]){
+    arr[k] = aux1[i];
+    i++;
+  }
+  else{
+    arr[k] = aux2[j];
+    j++;
+  }
+  k++;
+}
+
+// if something is remaining from aux1
+while(i<aux1.length){
+  arr[k] = aux1[i];
+  i++;
+  k++;
+}
+
+// if something is remaining from aux2
+while(j<aux2.length){
+  arr[k] = aux2[j];
+  j++;
+  k++;
+}
+
+
+//got sorted result array
+// k=0, i=0;
+// for(i=l;i<=r;i++){
+//   arr[i] = result[k];
+//   k++;
+// }
+}
+
+
+function mergeSort(arr, l, r){
+
+if(l<r){
+  var middle = parseInt((l+r)/2);
+
+  mergeSort(arr,l,middle);
+  mergeSort(arr,middle+1,r);
+
+  merge(arr,l,middle,r);
+}
+
+}
+
+
+var arr = [38,122,1,27,43,3,9,82,10];  
+
+mergeSort(arr, 0, arr.length-1);
+console.log(arr);
+</script>
+</body>
+</html>
